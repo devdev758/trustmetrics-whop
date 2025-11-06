@@ -123,3 +123,34 @@ model Achievement {
   @@index([milestoneId])
   @@index([verified])
 }
+
+model Benchmark {
+  id       String   @id @default(cuid())
+  category String   // Creator category (e.g., "fitness", "trading", "education", "all")
+  date     DateTime @default(now())
+
+  // Average metrics across category
+  avgTrustScore     Float @default(0)
+  avgRetentionRate  Float @default(0)
+  avgEngagementRate Float @default(0)
+  avgResponseTime   Float @default(0)
+  avgRefundRate     Float @default(0)
+  avgOutcomeRate    Float @default(0)
+
+  // Percentile values for trust score
+  p25TrustScore Float @default(0) // 25th percentile
+  p50TrustScore Float @default(0) // 50th percentile (median)
+  p75TrustScore Float @default(0) // 75th percentile
+  p90TrustScore Float @default(0) // 90th percentile
+
+  // Sample size
+  sampleSize Int @default(0) // Number of creators in this category
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([category, date])
+  @@index([category])
+  @@index([date])
+}
+

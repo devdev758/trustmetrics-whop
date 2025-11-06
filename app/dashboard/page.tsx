@@ -13,6 +13,7 @@ import { TrustScoreCard } from '@/components/dashboard/TrustScoreCard';
 import { MetricsGrid } from '@/components/dashboard/MetricsGrid';
 import { EmptyState } from '@/components/dashboard/EmptyState';
 import { SyncButton } from '@/components/dashboard/SyncButton';
+import { BenchmarkComparison } from '@/components/dashboard/BenchmarkComparison';
 
 /**
  * Fetch creator data and latest metrics
@@ -73,15 +74,25 @@ export default async function DashboardPage() {
 
   // Calculate trust score from latest metric if available
   let trustScoreResult;
+  let creatorMetrics;
   if (hasMetrics) {
+    creatorMetrics = {
+      trustScore: creator.trustScore,
+      retentionRate: latestMetric.retentionRate,
+      engagementRate: latestMetric.engagementRate,
+      responseTime: latestMetric.responseTime,
+      refundRate: latestMetric.refundRate,
+      outcomeRate: latestMetric.outcomeRate,
+    };
+
     trustScoreResult = calculateTrustScore({
-      outcomeRate: 0.85, // TODO: Get from actual metric data
-      satisfactionScore: 4.2,
-      engagementRate: latestMetric.engagementRate || 5,
-      retentionRate60: latestMetric.retentionRate30 || 0.7, // Using 30-day as proxy for 60-day
-      responseTime: 3,
-      contentConsistency: 4,
-      refundRate: 0.08,
+      outcomeRate: latestMetric.outcomeRate,
+      satisfactionScore: latestMetric.satisfactionScore,
+      engagementRate: latestMetric.engagementRate,
+      retentionRate60: latestMetric.retentionRate,
+      responseTime: latestMetric.responseTime,
+      contentConsistency: latestMetric.contentQuality,
+      refundRate: latestMetric.refundRate,
     });
   }
 
@@ -112,6 +123,9 @@ export default async function DashboardPage() {
 
             {/* Metrics Grid */}
             <MetricsGrid breakdown={trustScoreResult.breakdown} />
+
+            {/* Benchmark Comparison */}
+            <BenchmarkComparison creatorMetrics={creatorMetrics} />
 
             {/* Last Updated */}
             <div className="text-center text-sm text-gray-500">

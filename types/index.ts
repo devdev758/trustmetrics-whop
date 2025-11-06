@@ -27,4 +27,34 @@ export interface BadgeData {
   profileUrl: string;
 }
 
+// Benchmark types
+export interface BenchmarkData {
+  id: string;
+  category: string;
+  date: Date;
+  avgTrustScore: number;
+  avgRetentionRate: number;
+  avgEngagementRate: number;
+  avgResponseTime: number;
+  avgRefundRate: number;
+  avgOutcomeRate: number;
+  p25TrustScore: number;
+  p50TrustScore: number;
+  p75TrustScore: number;
+  p90TrustScore: number;
+  sampleSize: number;
+}
+
+export interface CreatorPercentile {
+  trustScore: number;
+  percentile: number;
+  rank: string;
+}
+
+export interface BenchmarkResponse {
+  benchmark: BenchmarkData;
+  percentile: CreatorPercentile;
+  category: string;
+}
+
 // Add more shared types here
