@@ -28,7 +28,9 @@ model Creator {
   updatedAt    DateTime  @updatedAt
 
   // Relations
-  metrics Metric[]
+  metrics    Metric[]
+  milestones Milestone[]
+  members    Member[]
 
   @@index([whopId])
   @@index([email])
@@ -51,4 +53,58 @@ model Metric {
 
   @@index([creatorId])
   @@index([date])
+}
+
+model Member {
+  id           String   @id @default(cuid())
+  creatorId    String
+  whopMemberId String   @unique
+  joinDate     DateTime @default(now())
+  status       String   @default("active") // active, inactive, cancelled
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  // Relations
+  creator      Creator      @relation(fields: [creatorId], references: [id], onDelete: Cascade)
+  achievements Achievement[]
+
+  @@index([creatorId])
+  @@index([whopMemberId])
+  @@index([status])
+}
+
+model Milestone {
+  id          String   @id @default(cuid())
+  creatorId   String
+  title       String
+  description String?  @db.Text
+  category    String   // e.g., "engagement", "revenue", "retention", "community"
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  creator      Creator       @relation(fields: [creatorId], references: [id], onDelete: Cascade)
+  achievements Achievement[]
+
+  @@index([creatorId])
+  @@index([category])
+}
+
+model Achievement {
+  id          String   @id @default(cuid())
+  memberId    String
+  milestoneId String
+  proofUrl    String?  @db.Text
+  achievedAt  DateTime @default(now())
+  verified    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  member    Member    @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  milestone Milestone @relation(fields: [milestoneId], references: [id], onDelete: Cascade)
+
+  @@index([memberId])
+  @@index([milestoneId])
+  @@index([verified])
 }
