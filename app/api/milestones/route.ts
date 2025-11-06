@@ -42,7 +42,7 @@ async function getSession(): Promise<SessionData | null> {
  *
  * Get all milestones for authenticated creator
  */
-export async function GET(request: NextRequest) {
+export async function GET(_request: NextRequest) {
   try {
     const session = await getSession();
 

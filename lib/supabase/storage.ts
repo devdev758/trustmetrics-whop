@@ -82,9 +82,7 @@ export async function deleteAchievementProof(fileUrl: string): Promise<void> {
 
   const filePath = urlParts[1];
 
-  const { error } = await supabase.storage
-    .from(BUCKET_NAME)
-    .remove([filePath]);
+  const { error } = await supabase.storage.from(BUCKET_NAME).remove([filePath]);
 
   if (error) {
     console.error('Supabase delete error:', error);

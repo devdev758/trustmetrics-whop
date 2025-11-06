@@ -113,7 +113,7 @@ async function handleLogout() {
 }
 
 // Or use the GET endpoint
-<a href="/api/auth/logout">Sign out</a>
+<a href="/api/auth/logout">Sign out</a>;
 ```
 
 ## Security Features
@@ -129,6 +129,7 @@ async function handleLogout() {
 ⚠️ **Important**: In production, you should encrypt tokens before storing them in the database.
 
 The current implementation stores tokens as plain text. Consider using encryption libraries like:
+
 - [@47ng/cloak](https://github.com/47ng/cloak)
 - [crypto-js](https://www.npmjs.com/package/crypto-js)
 
@@ -148,21 +149,26 @@ const decryptedToken = decrypt(creator.accessToken);
 ## API Endpoints
 
 ### GET /api/auth/whop
+
 Initiates OAuth flow by redirecting to Whop authorization page.
 
 **Query Parameters:**
+
 - `redirect` (optional): URL to redirect to after successful authentication
 
 ### GET /api/auth/whop/callback
+
 Handles OAuth callback from Whop.
 
 **Query Parameters:**
+
 - `code`: Authorization code from Whop
 - `state`: State parameter for CSRF protection
 - `error` (optional): Error code if authorization failed
 - `error_description` (optional): Human-readable error description
 
 ### GET|POST /api/auth/logout
+
 Logs out the current user by clearing their session.
 
 ## Error Handling
@@ -170,6 +176,7 @@ Logs out the current user by clearing their session.
 Authentication errors are redirected to `/auth/error?error=<message>`.
 
 Common errors:
+
 - Missing OAuth parameters
 - Invalid state parameter
 - State expired
@@ -179,6 +186,7 @@ Common errors:
 ## TypeScript Types
 
 All types are defined in `/types/whop.ts`:
+
 - `WhopTokens`: OAuth token response
 - `WhopUser`: User profile data
 - `WhopCompany`: Company/business data
@@ -188,6 +196,7 @@ All types are defined in `/types/whop.ts`:
 ## Scopes
 
 The OAuth flow requests the following scopes:
+
 - `openid`: OpenID Connect authentication
 - `profile`: Access to user profile
 - `email`: Access to user email

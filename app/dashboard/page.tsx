@@ -55,7 +55,7 @@ export default async function DashboardPage() {
   let session;
   try {
     session = await requireAuth();
-  } catch (error) {
+  } catch (_error) {
     redirect('/api/auth/whop');
   }
 
@@ -95,7 +95,7 @@ export default async function DashboardPage() {
               Welcome back, {creator.name}!
             </h1>
             <p className="mt-2 text-gray-600">
-              Here's an overview of your TrustMetrics performance
+              Here&apos;s an overview of your TrustMetrics performance
             </p>
           </div>
           <SyncButton />

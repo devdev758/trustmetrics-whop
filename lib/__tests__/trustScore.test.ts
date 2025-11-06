@@ -1,9 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import {
-  calculateTrustScore,
-  getTier,
-  type MetricInput,
-} from '../trustScore';
+import { calculateTrustScore, getTier, type MetricInput } from '../trustScore';
 
 describe('calculateTrustScore', () => {
   describe('Perfect Creator', () => {

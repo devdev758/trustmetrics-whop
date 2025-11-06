@@ -20,6 +20,7 @@ This guide explains how to set up Supabase Storage for achievement proof images.
 Navigate to the **Policies** tab for the `achievement-proofs` bucket and create the following policies:
 
 #### Policy 1: Public Read Access
+
 ```sql
 CREATE POLICY "Public read access"
 ON storage.objects FOR SELECT
@@ -28,6 +29,7 @@ USING (bucket_id = 'achievement-proofs');
 ```
 
 #### Policy 2: Authenticated Upload
+
 ```sql
 CREATE POLICY "Authenticated users can upload"
 ON storage.objects FOR INSERT
@@ -36,6 +38,7 @@ WITH CHECK (bucket_id = 'achievement-proofs');
 ```
 
 #### Policy 3: Authenticated Delete (Optional)
+
 ```sql
 CREATE POLICY "Authenticated users can delete own uploads"
 ON storage.objects FOR DELETE
@@ -83,7 +86,8 @@ const url = await uploadAchievementProof(
 ```typescript
 import { deleteAchievementProof } from '@/lib/supabase/storage';
 
-const fileUrl = 'https://...supabase.co/storage/v1/object/public/achievement-proofs/...';
+const fileUrl =
+  'https://...supabase.co/storage/v1/object/public/achievement-proofs/...';
 await deleteAchievementProof(fileUrl);
 ```
 
@@ -115,6 +119,7 @@ https://[project-ref].supabase.co/storage/v1/object/public/achievement-proofs/[f
 ```
 
 Example:
+
 ```
 https://abcdefgh.supabase.co/storage/v1/object/public/achievement-proofs/1234567890-abc123-proof.jpg
 ```
@@ -122,16 +127,19 @@ https://abcdefgh.supabase.co/storage/v1/object/public/achievement-proofs/1234567
 ## Troubleshooting
 
 ### Upload Fails with "403 Forbidden"
+
 - Check that the bucket policies are correctly set
 - Verify user is authenticated
 - Ensure `SUPABASE_SERVICE_ROLE_KEY` is set in environment variables
 
 ### Images Don't Load
+
 - Verify bucket is set to **Public**
 - Check that the public URL is correct
 - Ensure CORS is configured if accessing from different domain
 
 ### File Size Errors
+
 - Check file size is under 5MB
 - Verify file size limit is set correctly in bucket settings
 
@@ -172,9 +180,9 @@ const oldUnverified = await prisma.achievement.findMany({
   where: {
     verified: false,
     createdAt: {
-      lt: new Date(Date.now() - 90 * 24 * 60 * 60 * 1000)
-    }
-  }
+      lt: new Date(Date.now() - 90 * 24 * 60 * 60 * 1000),
+    },
+  },
 });
 
 // Delete associated files from storage
@@ -187,7 +195,7 @@ for (const achievement of oldUnverified) {
 // Delete records from database
 await prisma.achievement.deleteMany({
   where: {
-    id: { in: oldUnverified.map(a => a.id) }
-  }
+    id: { in: oldUnverified.map(a => a.id) },
+  },
 });
 ```

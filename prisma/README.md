@@ -12,16 +12,19 @@ This directory contains the Prisma schema and migrations for TrustMetrics.
    - `SUPABASE_SERVICE_ROLE_KEY` - Your Supabase service role key
 
 3. Generate the Prisma Client:
+
    ```bash
    npm run db:generate
    ```
 
 4. Push the schema to your database (for development):
+
    ```bash
    npm run db:push
    ```
 
    Or create a migration (for production):
+
    ```bash
    npm run db:migrate
    ```
@@ -35,7 +38,9 @@ This directory contains the Prisma schema and migrations for TrustMetrics.
 ## Models
 
 ### Creator
+
 Stores creator/merchant information from Whop.
 
 ### Metric
+
 Stores time-series metrics for each creator, including engagement, retention, and trust scores.

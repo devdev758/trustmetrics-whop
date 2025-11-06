@@ -61,7 +61,7 @@ function getScoreColors(score: number) {
   }
 }
 
-export function TrustScoreCard({ score, tier }: TrustScoreCardProps) {
+export function TrustScoreCard({ score, tier: _tier }: TrustScoreCardProps) {
   const colors = getScoreColors(score);
 
   return (
@@ -97,7 +97,10 @@ export function TrustScoreCard({ score, tier }: TrustScoreCardProps) {
         <div className="mb-6">
           <div className="flex items-baseline gap-2">
             <span
-              className={cn('text-6xl font-bold tracking-tight', colors.scoreText)}
+              className={cn(
+                'text-6xl font-bold tracking-tight',
+                colors.scoreText
+              )}
             >
               {score.toFixed(1)}
             </span>
@@ -107,7 +110,10 @@ export function TrustScoreCard({ score, tier }: TrustScoreCardProps) {
           {/* Progress Bar */}
           <div className="mt-4 h-3 overflow-hidden rounded-full bg-white">
             <div
-              className={cn('h-full rounded-full transition-all', colors.ring.replace('ring-', 'bg-'))}
+              className={cn(
+                'h-full rounded-full transition-all',
+                colors.ring.replace('ring-', 'bg-')
+              )}
               style={{ width: `${Math.min(score, 100)}%` }}
             />
           </div>

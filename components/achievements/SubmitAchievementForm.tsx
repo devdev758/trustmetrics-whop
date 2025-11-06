@@ -101,7 +101,9 @@ export function SubmitAchievementForm({
         const result = await response.json();
 
         if (!response.ok) {
-          throw new Error(result.message || result.error || 'Failed to submit achievement');
+          throw new Error(
+            result.message || result.error || 'Failed to submit achievement'
+          );
         }
 
         toast.success('Achievement submitted!', {
@@ -119,7 +121,8 @@ export function SubmitAchievementForm({
     } catch (error) {
       console.error('Error submitting achievement:', error);
       toast.error('Failed to submit achievement', {
-        description: error instanceof Error ? error.message : 'Please try again',
+        description:
+          error instanceof Error ? error.message : 'Please try again',
       });
       setIsSubmitting(false);
     }
@@ -196,7 +199,8 @@ export function SubmitAchievementForm({
                 </button>
               </div>
               <p className="mt-2 text-xs text-gray-600">
-                {selectedFile?.name} ({(selectedFile!.size / 1024 / 1024).toFixed(2)} MB)
+                {selectedFile?.name} (
+                {(selectedFile!.size / 1024 / 1024).toFixed(2)} MB)
               </p>
             </div>
           )}

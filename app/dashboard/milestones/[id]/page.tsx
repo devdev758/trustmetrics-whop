@@ -79,7 +79,7 @@ export default async function MilestonePage({ params }: MilestonePageProps) {
   let session;
   try {
     session = await requireAuth();
-  } catch (error) {
+  } catch (_error) {
     redirect('/api/auth/whop');
   }
 
@@ -93,7 +93,9 @@ export default async function MilestonePage({ params }: MilestonePageProps) {
     redirect('/dashboard/milestones');
   }
 
-  const verifiedCount = achievements.filter(a => a.verified).length;
+  const verifiedCount = achievements.filter(
+    (a: (typeof achievements)[number]) => a.verified
+  ).length;
 
   return (
     <DashboardLayout userName={creator.name} userEmail={creator.email}>
@@ -185,12 +187,14 @@ export default async function MilestonePage({ params }: MilestonePageProps) {
 
             {achievements.length > 0 ? (
               <div className="space-y-4">
-                {achievements.map(achievement => (
-                  <AchievementCard
-                    key={achievement.id}
-                    achievement={achievement}
-                  />
-                ))}
+                {achievements.map(
+                  (achievement: (typeof achievements)[number]) => (
+                    <AchievementCard
+                      key={achievement.id}
+                      achievement={achievement}
+                    />
+                  )
+                )}
               </div>
             ) : (
               /* Empty State */

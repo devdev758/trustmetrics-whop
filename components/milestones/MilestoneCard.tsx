@@ -7,7 +7,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Award, Edit2, Trash2, Users, ChevronRight } from 'lucide-react';
+import { Award, Users, ChevronRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface MilestoneCardProps {
@@ -66,8 +66,8 @@ function getCategoryConfig(category: string) {
 
 export function MilestoneCard({
   milestone,
-  onEdit,
-  onDelete,
+  onEdit: _onEdit,
+  onDelete: _onDelete,
 }: MilestoneCardProps) {
   const config = getCategoryConfig(milestone.category);
   const Icon = config.icon;

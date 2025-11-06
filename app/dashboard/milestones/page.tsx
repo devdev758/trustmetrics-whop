@@ -51,7 +51,7 @@ export default async function MilestonesPage() {
   let session;
   try {
     session = await requireAuth();
-  } catch (error) {
+  } catch (_error) {
     redirect('/api/auth/whop');
   }
 
@@ -90,7 +90,7 @@ export default async function MilestonesPage() {
             </div>
 
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {milestones.map(milestone => (
+              {milestones.map((milestone: (typeof milestones)[number]) => (
                 <MilestoneCard key={milestone.id} milestone={milestone} />
               ))}
             </div>
@@ -106,8 +106,8 @@ export default async function MilestonesPage() {
                 No milestones yet
               </h3>
               <p className="mb-6 text-sm text-gray-600">
-                Create your first milestone to start tracking member achievements
-                and building community engagement.
+                Create your first milestone to start tracking member
+                achievements and building community engagement.
               </p>
               <div className="flex flex-col gap-2 text-sm text-gray-500">
                 <p>📊 Track member progress</p>
@@ -131,7 +131,8 @@ export default async function MilestonesPage() {
               <p className="text-sm text-gray-600">Total Achievements</p>
               <p className="mt-1 text-2xl font-bold text-gray-900">
                 {milestones.reduce(
-                  (sum, m) => sum + (m._count?.achievements || 0),
+                  (sum: number, m: (typeof milestones)[number]) =>
+                    sum + (m._count?.achievements || 0),
                   0
                 )}
               </p>
@@ -140,11 +141,15 @@ export default async function MilestonesPage() {
               <p className="text-sm text-gray-600">Most Popular</p>
               <p className="mt-1 text-lg font-semibold text-gray-900">
                 {milestones.length > 0
-                  ? milestones.reduce((prev, curr) =>
-                      (curr._count?.achievements || 0) >
-                      (prev._count?.achievements || 0)
-                        ? curr
-                        : prev
+                  ? milestones.reduce(
+                      (
+                        prev: (typeof milestones)[number],
+                        curr: (typeof milestones)[number]
+                      ) =>
+                        (curr._count?.achievements || 0) >
+                        (prev._count?.achievements || 0)
+                          ? curr
+                          : prev
                     ).title
                   : 'N/A'}
               </p>

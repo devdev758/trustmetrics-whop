@@ -43,7 +43,7 @@ async function getSession(): Promise<SessionData | null> {
  *
  * Manually trigger data synchronization for authenticated creator
  */
-export async function POST(request: NextRequest) {
+export async function POST(_request: NextRequest) {
   try {
     // Verify authentication
     const session = await getSession();

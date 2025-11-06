@@ -49,8 +49,8 @@ export default async function Home() {
             </span>
           </h1>
           <p className="mx-auto mb-10 max-w-2xl text-xl text-gray-600">
-            TrustMetrics helps Whop creators measure and improve their
-            community engagement, retention, and overall trust score.
+            TrustMetrics helps Whop creators measure and improve their community
+            engagement, retention, and overall trust score.
           </p>
           <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <Link
@@ -69,7 +69,10 @@ export default async function Home() {
         </div>
 
         {/* Features */}
-        <div id="features" className="mt-24 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        <div
+          id="features"
+          className="mt-24 grid gap-8 sm:grid-cols-2 lg:grid-cols-4"
+        >
           <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
             <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-blue-100">
               <Shield className="h-6 w-6 text-blue-600" />
@@ -79,7 +82,7 @@ export default async function Home() {
             </h3>
             <p className="text-gray-600">
               Comprehensive score based on 7 key performance metrics to measure
-              your community's trust.
+              your community&apos;s trust.
             </p>
           </div>
 

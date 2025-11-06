@@ -38,10 +38,7 @@ export default function AuthErrorPage({ searchParams }: AuthErrorPageProps) {
           >
             Try Again
           </Link>
-          <Link
-            href="/"
-            className="text-sm text-gray-600 hover:text-gray-900"
-          >
+          <Link href="/" className="text-sm text-gray-600 hover:text-gray-900">
             Go to Home
           </Link>
         </div>

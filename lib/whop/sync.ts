@@ -47,7 +47,7 @@ async function fetchCompanyStats(
   // For now, returning mock data for demonstration
 
   try {
-    const company = await client.getCompany(companyId);
+    const _company = await client.getCompany(companyId);
 
     // Mock data - in production, these would come from actual API endpoints
     // Possible endpoints might include:
@@ -138,9 +138,7 @@ function calculateMetrics(stats: WhopCompanyStats): {
  * @param creatorId - The creator ID to sync
  * @returns Sync result with updated trust score
  */
-export async function syncCreatorData(
-  creatorId: string
-): Promise<SyncResult> {
+export async function syncCreatorData(creatorId: string): Promise<SyncResult> {
   try {
     // Fetch creator from database
     const creator = await prisma.creator.findUnique({
@@ -277,7 +275,7 @@ export async function syncAllCreators(): Promise<{
     },
   });
 
-  const creatorIds = creators.map(c => c.id);
+  const creatorIds = creators.map((c: (typeof creators)[number]) => c.id);
   const results = await syncMultipleCreators(creatorIds);
 
   const summary = {

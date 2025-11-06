@@ -23,7 +23,7 @@ export function EmptyState() {
           Welcome to TrustMetrics!
         </h2>
         <p className="mb-8 text-lg text-gray-600">
-          You don't have any metrics data yet. Follow these steps to get
+          You don&apos;t have any metrics data yet. Follow these steps to get
           started and build your trust score.
         </p>
 
@@ -40,7 +40,7 @@ export function EmptyState() {
                 Connect Your Whop Account
               </h3>
               <p className="mt-1 text-sm text-gray-600">
-                Already done! You're authenticated with Whop OAuth.
+                Already done! You&apos;re authenticated with Whop OAuth.
               </p>
               <div className="mt-2 flex items-center gap-1.5 text-sm font-medium text-green-600">
                 <CheckCircle2 className="h-4 w-4" />

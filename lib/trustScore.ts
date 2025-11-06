@@ -137,7 +137,8 @@ function normalizeOutcome(outcomeRate: number): number {
 function normalizeSatisfaction(satisfactionScore: number): number {
   const { satisfactionMin, satisfactionMax } = NORMALIZATION;
   const normalized =
-    ((satisfactionScore - satisfactionMin) / (satisfactionMax - satisfactionMin)) *
+    ((satisfactionScore - satisfactionMin) /
+      (satisfactionMax - satisfactionMin)) *
     100;
   return clamp(normalized);
 }
@@ -171,8 +172,7 @@ function normalizeRetention(retentionRate60: number): number {
  */
 function normalizeResponseTime(responseTime: number): number {
   if (responseTime <= 0) return 100;
-  const normalized =
-    (1 - responseTime / NORMALIZATION.responseTimeMax) * 100;
+  const normalized = (1 - responseTime / NORMALIZATION.responseTimeMax) * 100;
   return clamp(normalized);
 }
 

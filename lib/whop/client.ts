@@ -6,7 +6,12 @@
  */
 
 import { prisma } from '@/lib/prisma';
-import type { WhopUser, WhopCompany, WhopTokens, WhopError } from '@/types/whop';
+import type {
+  WhopUser,
+  WhopCompany,
+  WhopTokens,
+  WhopError,
+} from '@/types/whop';
 
 const WHOP_API_BASE = 'https://api.whop.com';
 const WHOP_OAUTH_BASE = 'https://whop.com/oauth';
@@ -106,7 +111,9 @@ export class WhopClient {
 
     if (!response.ok) {
       const error: WhopError = await response.json();
-      throw new Error(`Token refresh failed: ${error.error_description || error.error}`);
+      throw new Error(
+        `Token refresh failed: ${error.error_description || error.error}`
+      );
     }
 
     const tokens: WhopTokens = await response.json();
@@ -187,9 +194,7 @@ export class WhopClient {
 /**
  * Exchange authorization code for access tokens
  */
-export async function exchangeCodeForTokens(
-  code: string
-): Promise<WhopTokens> {
+export async function exchangeCodeForTokens(code: string): Promise<WhopTokens> {
   const clientId = process.env.WHOP_CLIENT_ID;
   const clientSecret = process.env.WHOP_CLIENT_SECRET;
   const redirectUri = process.env.WHOP_REDIRECT_URI;

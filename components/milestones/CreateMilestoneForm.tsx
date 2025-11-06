@@ -20,10 +20,11 @@ const milestoneSchema = z.object({
     .string()
     .min(3, 'Title must be at least 3 characters')
     .max(100, 'Title must be less than 100 characters'),
-  description: z.string().max(500, 'Description must be less than 500 characters').optional(),
-  category: z.enum(['engagement', 'revenue', 'retention', 'community'], {
-    required_error: 'Please select a category',
-  }),
+  description: z
+    .string()
+    .max(500, 'Description must be less than 500 characters')
+    .optional(),
+  category: z.enum(['engagement', 'revenue', 'retention', 'community']),
 });
 
 type MilestoneFormData = z.infer<typeof milestoneSchema>;
@@ -64,7 +65,9 @@ export function CreateMilestoneForm() {
       const result = await response.json();
 
       if (!response.ok) {
-        throw new Error(result.message || result.error || 'Failed to create milestone');
+        throw new Error(
+          result.message || result.error || 'Failed to create milestone'
+        );
       }
 
       toast.success('Milestone created successfully!', {
@@ -77,7 +80,8 @@ export function CreateMilestoneForm() {
     } catch (error) {
       console.error('Error creating milestone:', error);
       toast.error('Failed to create milestone', {
-        description: error instanceof Error ? error.message : 'Please try again',
+        description:
+          error instanceof Error ? error.message : 'Please try again',
       });
     } finally {
       setIsSubmitting(false);

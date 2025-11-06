@@ -13,7 +13,7 @@ export const dynamic = 'force-dynamic';
  *
  * Logs out the current user by clearing their session
  */
-export async function POST(request: NextRequest) {
+export async function POST(_request: NextRequest) {
   const response = NextResponse.json({ success: true });
 
   // Clear session cookie

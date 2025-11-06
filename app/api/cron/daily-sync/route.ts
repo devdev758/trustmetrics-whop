@@ -36,10 +36,7 @@ export async function GET(request: NextRequest) {
 
     if (providedSecret !== cronSecret) {
       console.warn('Unauthorized cron job attempt');
-      return NextResponse.json(
-        { error: 'Unauthorized' },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     // Execute sync for all creators
