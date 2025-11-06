@@ -6,7 +6,8 @@
 
 'use client';
 
-import { Award, Edit2, Trash2, Users } from 'lucide-react';
+import Link from 'next/link';
+import { Award, Edit2, Trash2, Users, ChevronRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface MilestoneCardProps {
@@ -73,69 +74,56 @@ export function MilestoneCard({
   const achievementCount = milestone._count?.achievements || 0;
 
   return (
-    <div className="group rounded-xl border border-gray-200 bg-white p-6 shadow-sm transition-all hover:shadow-md">
-      {/* Header */}
-      <div className="mb-4 flex items-start justify-between">
-        <div className="flex items-start gap-3">
-          <div className={cn('rounded-lg p-2.5', config.bg)}>
-            <Icon className={cn('h-5 w-5', config.color)} />
+    <Link href={`/dashboard/milestones/${milestone.id}`}>
+      <div className="group cursor-pointer rounded-xl border border-gray-200 bg-white p-6 shadow-sm transition-all hover:shadow-md hover:border-blue-300">
+        {/* Header */}
+        <div className="mb-4 flex items-start justify-between">
+          <div className="flex items-start gap-3">
+            <div className={cn('rounded-lg p-2.5', config.bg)}>
+              <Icon className={cn('h-5 w-5', config.color)} />
+            </div>
+            <div>
+              <h3 className="font-semibold text-gray-900">{milestone.title}</h3>
+              <p className="mt-0.5 text-sm text-gray-500">
+                {milestone.category.charAt(0).toUpperCase() +
+                  milestone.category.slice(1)}
+              </p>
+            </div>
           </div>
-          <div>
-            <h3 className="font-semibold text-gray-900">{milestone.title}</h3>
-            <p className="mt-0.5 text-sm text-gray-500">
-              {milestone.category.charAt(0).toUpperCase() +
-                milestone.category.slice(1)}
-            </p>
+
+          {/* View Details Icon */}
+          <div className="flex items-center gap-1">
+            <ChevronRight className="h-5 w-5 text-gray-400 transition-transform group-hover:translate-x-1" />
           </div>
         </div>
 
-        {/* Action Buttons */}
-        <div className="flex items-center gap-1 opacity-0 transition-opacity group-hover:opacity-100">
-          {onEdit && (
-            <button
-              onClick={() => onEdit(milestone.id)}
-              className="rounded-lg p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-600"
-              title="Edit milestone"
-            >
-              <Edit2 className="h-4 w-4" />
-            </button>
-          )}
-          {onDelete && (
-            <button
-              onClick={() => onDelete(milestone.id)}
-              className="rounded-lg p-2 text-gray-400 hover:bg-red-100 hover:text-red-600"
-              title="Delete milestone"
-            >
-              <Trash2 className="h-4 w-4" />
-            </button>
-          )}
-        </div>
-      </div>
+        {/* Description */}
+        {milestone.description && (
+          <p className="mb-4 text-sm text-gray-600 line-clamp-2">
+            {milestone.description}
+          </p>
+        )}
 
-      {/* Description */}
-      {milestone.description && (
-        <p className="mb-4 text-sm text-gray-600">{milestone.description}</p>
-      )}
+        {/* Achievement Count */}
+        <div className="flex items-center justify-between border-t border-gray-100 pt-4">
+          <div className="flex items-center gap-2">
+            <Award className="h-4 w-4 text-gray-400" />
+            <span className="text-sm font-medium text-gray-700">
+              {achievementCount}{' '}
+              {achievementCount === 1 ? 'Achievement' : 'Achievements'}
+            </span>
+          </div>
 
-      {/* Achievement Count */}
-      <div className="flex items-center justify-between border-t border-gray-100 pt-4">
-        <div className="flex items-center gap-2">
-          <Award className="h-4 w-4 text-gray-400" />
-          <span className="text-sm font-medium text-gray-700">
-            {achievementCount}{' '}
-            {achievementCount === 1 ? 'Achievement' : 'Achievements'}
+          <span className="text-xs text-gray-500">
+            Created{' '}
+            {new Date(milestone.createdAt).toLocaleDateString('en-US', {
+              month: 'short',
+              day: 'numeric',
+              year: 'numeric',
+            })}
           </span>
         </div>
-
-        <span className="text-xs text-gray-500">
-          Created{' '}
-          {new Date(milestone.createdAt).toLocaleDateString('en-US', {
-            month: 'short',
-            day: 'numeric',
-            year: 'numeric',
-          })}
-        </span>
       </div>
-    </div>
+    </Link>
   );
 }
