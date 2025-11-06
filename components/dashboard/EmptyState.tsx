@@ -11,11 +11,11 @@ import { cn } from '@/lib/utils';
 
 export function EmptyState() {
   return (
-    <div className="rounded-2xl border-2 border-dashed border-gray-300 bg-white px-6 py-16">
+    <div className="animate-in fade-in-50 duration-500 rounded-2xl border-2 border-dashed border-gray-300 bg-gradient-to-br from-white to-gray-50 px-6 py-16 shadow-sm">
       <div className="mx-auto max-w-2xl text-center">
         {/* Icon */}
-        <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-blue-100">
-          <BarChart3 className="h-10 w-10 text-blue-600" />
+        <div className="animate-bounce-slow mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-purple-600 shadow-lg">
+          <BarChart3 className="h-10 w-10 text-white" />
         </div>
 
         {/* Heading */}

@@ -67,7 +67,7 @@ export function TrustScoreCard({ score, tier: _tier }: TrustScoreCardProps) {
   return (
     <div
       className={cn(
-        'relative overflow-hidden rounded-2xl border-2 p-8',
+        'group relative overflow-hidden rounded-2xl border-2 p-8 shadow-lg transition-all duration-300 hover:shadow-2xl',
         colors.bg,
         colors.border
       )}
