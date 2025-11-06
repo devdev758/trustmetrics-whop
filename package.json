@@ -9,6 +9,9 @@
     "lint": "next lint",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:run": "vitest run",
     "db:generate": "prisma generate",
     "db:push": "prisma db push",
     "db:migrate": "prisma migrate dev"
@@ -25,6 +28,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@vitest/ui": "^4.0.7",
     "eslint": "^8",
     "eslint-config-next": "14.2.33",
     "eslint-config-prettier": "^10.1.8",
@@ -33,6 +37,7 @@
     "prettier": "^3.6.2",
     "prisma": "^6.19.0",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^4.0.7"
   }
 }
