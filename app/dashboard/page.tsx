@@ -12,6 +12,7 @@ import { DashboardLayout } from '@/components/dashboard/DashboardLayout';
 import { TrustScoreCard } from '@/components/dashboard/TrustScoreCard';
 import { MetricsGrid } from '@/components/dashboard/MetricsGrid';
 import { EmptyState } from '@/components/dashboard/EmptyState';
+import { SyncButton } from '@/components/dashboard/SyncButton';
 
 /**
  * Fetch creator data and latest metrics
@@ -88,13 +89,16 @@ export default async function DashboardPage() {
     <DashboardLayout userName={creator.name} userEmail={creator.email}>
       <div className="space-y-8">
         {/* Page Header */}
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900">
-            Welcome back, {creator.name}!
-          </h1>
-          <p className="mt-2 text-gray-600">
-            Here's an overview of your TrustMetrics performance
-          </p>
+        <div className="flex items-start justify-between">
+          <div>
+            <h1 className="text-3xl font-bold text-gray-900">
+              Welcome back, {creator.name}!
+            </h1>
+            <p className="mt-2 text-gray-600">
+              Here's an overview of your TrustMetrics performance
+            </p>
+          </div>
+          <SyncButton />
         </div>
 
         {/* Content */}
