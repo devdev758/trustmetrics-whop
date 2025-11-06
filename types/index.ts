@@ -17,4 +17,14 @@ export interface ApiResponse<T> {
   message?: string;
 }
 
+// Badge types
+export interface BadgeData {
+  creatorId: string;
+  creatorName: string;
+  trustScore: number;
+  tier: 'gold' | 'silver' | 'bronze';
+  embedCode: string;
+  profileUrl: string;
+}
+
 // Add more shared types here
