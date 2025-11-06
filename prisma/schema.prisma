@@ -24,6 +24,11 @@ model Creator {
   refreshToken String?   @db.Text
   tokenExpiry  DateTime?
 
+  // Stripe subscription fields
+  stripeCustomerId     String? @unique
+  stripeSubscriptionId String? @unique
+  subscriptionStatus   String  @default("inactive") // inactive, active, past_due, canceled, trialing
+
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
 
@@ -35,18 +40,28 @@ model Creator {
   @@index([whopId])
   @@index([email])
   @@index([trustScore])
+  @@index([stripeCustomerId])
+  @@index([subscriptionStatus])
 }
 
 model Metric {
-  id                String   @id @default(cuid())
-  creatorId         String
-  date              DateTime @default(now())
-  totalMembers      Int      @default(0)
-  retentionRate30   Float    @default(0)
-  engagementRate    Float    @default(0)
-  trustScore        Float    @default(0)
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @updatedAt
+  id                 String   @id @default(cuid())
+  creatorId          String
+  date               DateTime @default(now())
+  totalMembers       Int      @default(0)
+
+  // All 7 metrics for trust score calculation
+  outcomeRate        Float    @default(0)
+  satisfactionScore  Float    @default(0)
+  engagementRate     Float    @default(0)
+  retentionRate      Float    @default(0)
+  responseTime       Float    @default(0)
+  contentQuality     Float    @default(0)
+  refundRate         Float    @default(0)
+
+  trustScore         Float    @default(0)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
 
   // Relations
   creator Creator @relation(fields: [creatorId], references: [id], onDelete: Cascade)

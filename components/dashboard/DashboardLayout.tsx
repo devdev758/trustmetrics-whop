@@ -8,7 +8,13 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LogOut, LayoutDashboard, Award, Shield } from 'lucide-react';
+import {
+  LogOut,
+  LayoutDashboard,
+  Award,
+  Shield,
+  CreditCard,
+} from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface DashboardLayoutProps {
@@ -48,6 +54,11 @@ export function DashboardLayout({
       href: '/dashboard/badge',
       label: 'Trust Badge',
       icon: Shield,
+    },
+    {
+      href: '/dashboard/billing',
+      label: 'Billing',
+      icon: CreditCard,
     },
   ];
 
