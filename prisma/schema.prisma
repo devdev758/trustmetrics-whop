@@ -1,0 +1,48 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Creator {
+  id         String   @id @default(cuid())
+  whopId     String   @unique
+  email      String   @unique
+  name       String
+  category   String?
+  trustScore Float    @default(0)
+  tier       String   @default("bronze")
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  // Relations
+  metrics Metric[]
+
+  @@index([whopId])
+  @@index([email])
+  @@index([trustScore])
+}
+
+model Metric {
+  id                String   @id @default(cuid())
+  creatorId         String
+  date              DateTime @default(now())
+  totalMembers      Int      @default(0)
+  retentionRate30   Float    @default(0)
+  engagementRate    Float    @default(0)
+  trustScore        Float    @default(0)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  // Relations
+  creator Creator @relation(fields: [creatorId], references: [id], onDelete: Cascade)
+
+  @@index([creatorId])
+  @@index([date])
+}
